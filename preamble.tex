@@ -1,7 +1,7 @@
-% ===== preamble =====
+% ===== Mathematical Statistics Notes: preamble =====
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[margin=1in]{geometry}
+\usepackage[letterpaper,margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{enumitem}
 \usepackage{microtype}
@@ -12,8 +12,15 @@
 \usetikzlibrary{positioning,calc,arrows.meta,shapes.geometric,fit,backgrounds,patterns}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
-\usepackage[most]{tcolorbox}
 \usepackage[hidelinks]{hyperref}
+
+% ---- page layout: page number centered in the footer, no running heads ----
+\pagestyle{plain}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{0pt}{2.8em}}
+\makeatother
 
 % ---- theorem environments (shared per-section counter) ----
 \theoremstyle{definition}
@@ -25,6 +32,11 @@
 \newtheorem{proposition}[definition]{Proposition}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
+\newtheorem{axiom}{Axiom}
+
+% ---- decision guide: \begin{strategy}[title] ... \end{strategy}; the title is a bold heading ----
+\newenvironment{strategy}[1][How to recognise which rule to use]{\par\medskip\noindent\textbf{#1}\par\nopagebreak\smallskip
+  \setlength{\parindent}{0pt}}{\par\medskip}
 
 % ---- exercise list ----
 \newlist{exer}{enumerate}{1}
@@ -101,17 +113,9 @@
 
 % ---- presentation helpers ----
 \newcommand{\keyword}[1]{\textbf{#1}}
-\newcommand{\whichrule}[1]{\par\smallskip\noindent$\blacktriangleright$\ \textbf{Which rule, and why?}\enspace #1\par}
-\newcommand{\soln}{\par\smallskip\noindent\textbf{Solution.}\enspace}
+\newcommand{\whichrule}[1]{\par\smallskip\noindent\textit{Which rule, and why?}\enspace #1\par}
+\newcommand{\soln}{\par\smallskip\noindent\textit{Solution.}\enspace}
 \newcommand{\steplabel}[1]{\par\smallskip\noindent\textit{#1}\enspace}
-% Decision-guide callout box ("how to recognise which rule to use")
-\newtcolorbox{strategy}[1][How to recognise which rule to use]{%
-  enhanced,breakable,
-  colback=black!3,colframe=black!60,boxrule=0.5pt,sharp corners,
-  fonttitle=\bfseries,coltitle=black,colbacktitle=black!10,
-  title={#1},attach title to upper,after title={\par\smallskip},
-  left=8pt,right=8pt,top=6pt,bottom=7pt,toptitle=3pt,bottomtitle=2pt,
-  before skip=8pt,after skip=10pt}
 
 % =====================================================================
 %  Reusable diagram styles -- consistent, proven-clean geometry.
@@ -151,13 +155,8 @@
 \renewcommand{\@tocrmarg}{3.0em}
 \makeatother
 
-% ---- sanity-check marker: render as a filled black box (was a checkmark) ----
-% \ensuremath works in both math and text mode, so every existing \checkmark
-% (bare in text, $\checkmark$ in math, or inside display math) prints \blacksquare.
+% ---- sanity-check marker: a filled black box ----
 \renewcommand{\checkmark}{\ensuremath{\blacksquare}}
-
-% ---- Ch2: axiom theorem environment (shares the per-section definition counter style) ----
-\newtheorem{axiom}{Axiom}
 
 % ---- Ch6: "reject H0" shorthand ----
 \newcommand{\reject}{\text{reject }\Hnull}
